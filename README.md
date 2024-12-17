@@ -1,1 +1,1 @@
-Web Programlama ödev
+Web ödev

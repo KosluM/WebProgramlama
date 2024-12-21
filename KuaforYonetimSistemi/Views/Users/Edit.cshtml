@@ -1,0 +1,28 @@
+﻿@model KuaforYonetimSistemi.Models.User
+
+<h2>Kullanıcı Düzenle</h2>
+
+<form asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div class="mb-3">
+        <label>Adı</label>
+        <input asp-for="FirstName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Soyadı</label>
+        <input asp-for="LastName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Rol</label>
+        <select asp-for="Role" class="form-control">
+            <option>Admin</option>
+            <option>Kullanıcı</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

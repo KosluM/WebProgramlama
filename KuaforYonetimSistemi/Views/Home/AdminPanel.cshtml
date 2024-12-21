@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Admin Panel</h1>
+<p>Hoş geldiniz, Admin! Bu alanda yönetici işlemlerini gerçekleştirebilirsiniz.</p>
+
+<ul>
+    <li><a asp-controller="Users" asp-action="Index" class="btn btn-primary">Kullanıcı Yönetimi</a></li>
+    <li><a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Ana Sayfaya Dön</a></li>
+</ul>

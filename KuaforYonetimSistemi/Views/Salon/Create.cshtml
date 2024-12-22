@@ -1,0 +1,26 @@
+﻿@model KuaforYonetimSistemi.Models.Salon
+
+<h2>Yeni Salon Ekle</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Adı</label>
+        <input type="text" name="Name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Adres</label>
+        <input type="text" name="Address" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>İletişim Bilgisi</label>
+        <input type="text" name="ContactInfo" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Açılış Saati</label>
+        <input type="text" name="OpeningHours" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Kapanış Saati</label>
+        <input type="text" name="ClosingHours" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

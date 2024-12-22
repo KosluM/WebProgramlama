@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace KuaforYonetimSistemi.Controllers
 {
@@ -10,14 +9,7 @@ namespace KuaforYonetimSistemi.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminPanel()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "User")]
-        public IActionResult UserPanel()
+        public IActionResult Privacy()
         {
             return View();
         }

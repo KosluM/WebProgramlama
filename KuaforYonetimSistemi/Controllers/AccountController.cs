@@ -14,7 +14,6 @@ namespace KuaforYonetimSistemi.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
             return View();
@@ -23,59 +22,48 @@ namespace KuaforYonetimSistemi.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
+            // 📌 Boş giriş kontrolü
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                ModelState.AddModelError("", "Geçersiz giriş bilgileri.");
+                ModelState.AddModelError(string.Empty, "E-posta ve şifre boş bırakılamaz.");
                 return View();
             }
 
+            // 📌 Kullanıcıyı e-posta ile bul
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Geçersiz e-posta veya şifre.");
+                return View();
+            }
+
+            // 📌 Giriş işlemi kullanıcı adı üzerinden yapılır
             var result = await _signInManager.PasswordSignInAsync(user.UserName, password, false, false);
 
             if (result.Succeeded)
             {
+                // 📌 Rol bazlı yönlendirme
+                if (await _userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    return RedirectToAction("AdminDashboard", "Admin");
+                }
+                else if (await _userManager.IsInRoleAsync(user, "Customer"))
+                {
+                    return RedirectToAction("CustomerDashboard", "Customer");
+                }
+
+                // 📌 Varsayılan yönlendirme
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError("", "Geçersiz giriş denemesi.");
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(string email, string password)
-        {
-            var user = new IdentityUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
-
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
-            }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
-
+            ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
             return View();
         }
 
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
-
-        public IActionResult AccessDenied()
-        {
-            return View();
+            return RedirectToAction("Login");
         }
     }
 }

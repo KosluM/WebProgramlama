@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KuaforYonetimSistemi.Models
@@ -9,27 +10,26 @@ namespace KuaforYonetimSistemi.Models
         public int Id { get; set; }
 
         [Required]
-        public string CustomerName { get; set; } = string.Empty;
+        public string CustomerId { get; set; }
 
-        [Required]
-        [ForeignKey("Employee")]
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
-
-        [Required]
-        [ForeignKey("Service")]
-        public int ServiceId { get; set; }
-        public Service Service { get; set; }
+        [ForeignKey("CustomerId")]
+        public virtual IdentityUser Customer { get; set; }
 
         [Required]
         public DateTime AppointmentDate { get; set; }
 
         [Required]
-        public string Status { get; set; } = "Pending";
+        public string Service { get; set; }
+
+        public string Notes { get; set; }
 
         [Required]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string Status { get; set; } // Pending, Confirmed, Canceled
+
+        // New property added for employee assignment
+        public int EmployeeId { get; set; }
+
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
     }
 }

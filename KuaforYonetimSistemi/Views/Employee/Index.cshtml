@@ -1,7 +1,15 @@
 ﻿@model IEnumerable<KuaforYonetimSistemi.Models.Employee>
 
-<h2>Çalışan Listesi</h2>
-<table class="table">
+<h1>Çalışan Listesi</h1>
+
+<!-- Admin Yetkisiyle "Çalışan Ekle" Butonu -->
+@if (User.IsInRole("Admin"))
+{
+    <a class="btn btn-primary" href="@Url.Action("Create", "Employee")">Çalışan Ekle</a>
+}
+
+<!-- Çalışanları Listeleme -->
+<table class="table table-bordered mt-3">
     <thead>
         <tr>
             <th>Adı</th>
@@ -12,16 +20,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var employee in Model)
         {
             <tr>
-                <td>@item.FirstName</td>
-                <td>@item.LastName</td>
-                <td>@item.Specialty</td>
-                <td>@(item.IsAvailable ? "Uygun" : "Meşgul")</td>
+                <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.Specialty</td>
+                <td>@(employee.IsAvailable ? "Uygun" : "Uygun Değil")</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Employee", new { id = item.Id })" class="btn btn-primary">Düzenle</a>
-                    <a href="@Url.Action("Delete", "Employee", new { id = item.Id })" class="btn btn-danger">Sil</a>
+                    <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-sm btn-warning">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
                 </td>
             </tr>
         }

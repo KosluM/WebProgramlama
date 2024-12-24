@@ -1,0 +1,104 @@
+﻿/* === Genel Stil Ayarları === */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    margin: 0;
+    padding: 0;
+}
+
+/* === Kart Tasarımları === */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+}
+
+    .card h3 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+        color: #4facfe;
+    }
+
+    .card p {
+        font-size: 1em;
+        margin-bottom: 20px;
+        color: #888;
+    }
+
+/* === Form Elemanları === */
+form .form-control {
+    border-radius: 25px;
+    margin-bottom: 15px;
+}
+
+form button {
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+form .btn-primary {
+    background: #4facfe;
+    border: none;
+}
+
+    form .btn-primary:hover {
+        background: #008cff;
+    }
+
+/* === Bağlantı Butonları === */
+.link-btn {
+    margin-top: 15px;
+    display: block;
+    font-size: 0.9em;
+    color: #4facfe;
+}
+
+    .link-btn:hover {
+        text-decoration: underline;
+    }
+
+/* === Dashboard Tasarımları === */
+.dashboard-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.dashboard-header {
+    font-size: 2em;
+    font-weight: bold;
+    color: #4facfe;
+    margin-bottom: 20px;
+}
+
+.dashboard-content a {
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.dashboard-content .btn-primary {
+    background: #4facfe;
+}
+
+.dashboard-content .btn-success {
+    background: #28a745;
+}
+.alert {
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-radius: 5px;
+}

@@ -1,32 +1,26 @@
 ﻿@model KuaforYonetimSistemi.Models.Employee
 
-<h2>Yeni Çalışan Ekle</h2>
-<form method="post">
-    <div class="mb-3">
-        <label>Çalışan Adı</label>
-        <input type="text" name="Name" class="form-control" required />
+<h2>Çalışan Ekle</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label>Adı</label>
+        <input asp-for="FirstName" class="form-control" />
     </div>
-    <div class="mb-3">
-        <label>Uzmanlık Alanı</label>
-        <input type="text" name="Specialty" class="form-control" required />
+    <div class="form-group">
+        <label>Soyadı</label>
+        <input asp-for="LastName" class="form-control" />
     </div>
-    <div class="mb-3">
-        <label>Çalışma Başlangıç Saati</label>
-        <input type="text" name="AvailabilityStart" class="form-control" required />
+    <div class="form-group">
+        <label>Uzmanlık</label>
+        <input asp-for="Specialty" class="form-control" />
     </div>
-    <div class="mb-3">
-        <label>Çalışma Bitiş Saati</label>
-        <input type="text" name="AvailabilityEnd" class="form-control" required />
-    </div>
-    <div class="mb-3">
-        <label>Salon</label>
-        <select name="SalonID" class="form-control">
-            <option value="">Salon Seçin</option>
-            @foreach (var salon in ViewBag.Salons)
-            {
-                <option value="@salon.ID">@salon.Name</option>
-            }
+    <div class="form-group">
+        <label>Durum</label>
+        <select asp-for="IsAvailable" class="form-control">
+            <option value="true">Uygun</option>
+            <option value="false">Uygun Değil</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
 </form>

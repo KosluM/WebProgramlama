@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KuaforYonetimSistemi.Models
 {
@@ -8,22 +7,27 @@ namespace KuaforYonetimSistemi.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string FirstName { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Çalışan adı boş bırakılamaz.")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Uzmanlık alanı boş bırakılamaz.")]
+        public string Specialty { get; set; }
+
+        [Required(ErrorMessage = "Çalışma başlangıç saati boş bırakılamaz.")]
+        public TimeSpan AvailabilityStart { get; set; }
+
+        [Required(ErrorMessage = "Çalışma bitiş saati boş bırakılamaz.")]
+        public TimeSpan AvailabilityEnd { get; set; }
 
         [Required]
-        public string LastName { get; set; } = string.Empty;
+        public bool IsAvailable { get; set; } = true; // Varsayılan olarak uygun
+
+        public string Notes { get; set; }
 
         [Required]
-        public string Specialty { get; set; } = string.Empty;
+        public string Salon { get; set; } // Hangi salona bağlı olduğu
 
-        public string AvailabilityStart { get; set; } = string.Empty;
-        public string AvailabilityEnd { get; set; } = string.Empty;
-
-        public bool IsAvailable { get; set; } = true;
-
-        [ForeignKey("Salon")]
-        public int SalonID { get; set; }
-        public Salon Salon { get; set; }
+        // New property added for assignment of employees to appointments
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }

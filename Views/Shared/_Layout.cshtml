@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebProgramlama</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Admin" asp-action="AdminDashboard">Admin Dashboard</a></li>
+                        <li><a asp-controller="Employee" asp-action="Index">Çalışan Yönetimi</a></li>
+                    }
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <li><a asp-controller="Customer" asp-action="CustomerDashboard">Customer Dashboard</a></li>
+                    }
+                    <li>
+                        <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-link" style="color: red;">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <main role="main" class="container mt-3">
+        @RenderBody()
+    </main>
+
+    <footer class="text-center mt-4">
+        <p>&copy; @DateTime.Now.Year - WebProgramlama</p>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

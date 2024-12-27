@@ -1,0 +1,36 @@
+﻿@model WebProgramlama.Models.Appointment
+
+<h2>Yeni Randevu Oluştur</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label>Müşteri</label>
+        <select asp-for="CustomerId" asp-items="@(new SelectList(ViewBag.Customers, "Id", "FullName"))" class="form-control">
+            <option value="">Müşteri Seçin</option>
+        </select>
+    </div>
+    <div>
+        <label>Çalışan</label>
+        <select asp-for="EmployeeId" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))" class="form-control">
+            <option value="">Çalışan Seçin</option>
+        </select>
+    </div>
+    <div>
+        <label>Randevu Tarihi</label>
+        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
+    </div>
+    <div>
+        <label>Hizmet</label>
+        <input asp-for="Service" class="form-control" />
+    </div>
+    <div>
+        <label>Süre (dk)</label>
+        <input asp-for="DurationInMinutes" class="form-control" />
+    </div>
+    <div>
+        <label>Ücret</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Randevu Oluştur</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">İptal</a>
+</form>
